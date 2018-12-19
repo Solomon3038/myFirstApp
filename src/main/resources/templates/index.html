@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quoteslist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+
+
+	<h1>Quotes</h1>
+<form th:action="@{/logout}" action="#" method="post">
+	<input type="submit" class="btn btn-success" value="Logout"></input>
+</form>
+    <table class="table table-striped">
+		<tr>
+		    <th>Text</th>
+			<th>Author</th>
+			<th></th>
+			<th></th>
+		</tr>  
+    	<tr th:each = "quote : ${quotes}">
+    		<td th:text="${quote.text}"></td>
+    		<td th:text="${quote.author.name}"></td>
+    		<td>
+				<form th:action="@{/delete/{id}(id=${quote.id})}" method="post">
+					<button class="btn btn-danger" type="submit">Delete</button>
+				</form>
+			</td>
+			<td>
+				<a th:href="@{/update/{id}(id=${quote.id})}" class="btn">Update</a>
+			</td>
+    	</tr>
+    </table>
+    <a href="/add" class="btn btn-success">Add Quote</a>
+    
+</body>
+</html>
